@@ -3,7 +3,7 @@ source: source
 safe: false
 permalink: /news/:year/:month/:day/:title/
 
-gems:
+plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
 
@@ -11,35 +11,55 @@ kramdown:
   input: GFM
   parse_block_html: true
   toc_levels: 2..4
-  enable_coderay: true
-  syntax_highlighter: rouge
-
-  syntax_highlighter_opts:
-    wrap: div
-    css: class
 
 image_api:
-  latest:
+  draft:
+    major: 3
+    minor: 0
+    patch: 0
+  stable:
     major: 2
     minor: 1
-    patch: 0
+    patch: 1
 presentation_api:
-  latest:
+  draft:
+    major: 3
+    minor: 0
+    patch: 0
+  stable:
     major: 2
     minor: 1
-    patch: 0
+    patch: 1
 shared_canvas:
-  latest:
+  draft:
+    major: 1
+    minor: 0
+    patch: 0
+  stable:
     major: 1
     minor: 0
     patch: 0
 search_api:
-  latest:
+  draft:
+    major: 1
+    minor: 0
+    patch: 0
+  stable:
     major: 1
     minor: 0
     patch: 0
 auth_api:
-  latest:
+  draft:
     major: 1
     minor: 0
     patch: 0
+  stable:
+    major: 1
+    minor: 0
+    patch: 0
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      webprefix: "https://iiif.io"

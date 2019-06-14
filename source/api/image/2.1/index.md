@@ -1,12 +1,12 @@
 ---
-title: "Image API 2.1"
-title_override: "IIIF Image API 2.1"
+title: "Image API 2.1.1"
+title_override: "IIIF Image API 2.1.1"
 id: image-api
 layout: spec
 tags: [specifications, image-api]
 major: 2
 minor: 1
-patch: 0
+patch: 1
 pre: final
 redirect_from:
   - /api/image/index.html
@@ -18,17 +18,17 @@ redirect_from:
 
 __This Version:__ {{ page.major }}.{{ page.minor }}.{{ page.patch }}{% if page.pre != 'final' %}-{{ page.pre }}{% endif %}
 
-__Latest Stable Version:__ [{{ site.image_api.latest.major }}.{{ site.image_api.latest.minor }}.{{ site.image_api.latest.patch }}][stable-version]
+__Latest Stable Version:__ [{{ site.image_api.stable.major }}.{{ site.image_api.stable.minor }}.{{ site.image_api.stable.patch }}][stable-version]
 
 __Previous Version:__ [2.0][prev-version]
 
 **Editors:**
 
-  * **[Michael Appleby](https://orcid.org/0000-0002-1266-298X)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0002-1266-298X), [_Yale University_](http://www.yale.edu/)
-  * **[Tom Crane](https://orcid.org/0000-0003-1881-243X)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0003-1881-243X), [_Digirati_](http://digirati.com/)
-  * **[Robert Sanderson](https://orcid.org/0000-0003-4441-6852)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0003-4441-6852), [_Stanford University_](http://www.stanford.edu/)
-  * **[Jon Stroop](https://orcid.org/0000-0002-0367-1243)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0002-0367-1243), [_Princeton University Library_](https://library.princeton.edu/)
-  * **[Simeon Warner](https://orcid.org/0000-0002-7970-7855)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0002-7970-7855), [_Cornell University_](https://www.cornell.edu/)
+  * **[Michael Appleby](https://orcid.org/0000-0002-1266-298X)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0002-1266-298X), [_Yale University_](http://www.yale.edu/)
+  * **[Tom Crane](https://orcid.org/0000-0003-1881-243X)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0003-1881-243X), [_Digirati_](http://digirati.com/)
+  * **[Robert Sanderson](https://orcid.org/0000-0003-4441-6852)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0003-4441-6852), [_J. Paul Getty Trust_](http://www.getty.edu/)
+  * **[Jon Stroop](https://orcid.org/0000-0002-0367-1243)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0002-0367-1243), [_Princeton University Library_](https://library.princeton.edu/)
+  * **[Simeon Warner](https://orcid.org/0000-0002-7970-7855)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0002-7970-7855), [_Cornell University_](https://www.cornell.edu/)
   {: .names}
 
 {% include copyright.md %}
@@ -48,6 +48,7 @@ This document describes an image delivery API defined by the International Image
 Please send feedback to [iiif-discuss@googlegroups.com][iiif-discuss].
 
 ### 1.1. Audience and Scope
+{: #audience-and-scope}
 
 This document is intended for architects and developers building applications that share and consume digital images, particularly from cultural heritage institutions, museums, libraries and archives. Target applications include:
 
@@ -58,10 +59,12 @@ This document is intended for architects and developers building applications th
 This specification concerns image requests by a client, but not management of the images by the server. It covers how to respond to the requests given in a particular URI syntax, but does not cover methods of implementation such as rotation algorithms, transcoding, color management, compression, or how to respond to URIs that do not conform to the specified syntax. This allows flexibility for implementation in domains with particular constraints or specific community practices, while supporting interoperability in the general case.
 
 ### 1.2. Terminology
+{: #terminology}
 
 The key words _MUST_, _MUST NOT_, _REQUIRED_, _SHALL_, _SHALL NOT_, _SHOULD_, _SHOULD NOT_, _RECOMMENDED_, and _OPTIONAL_ in this document are to be interpreted as described in [RFC 2119][rfc-2119].
 
 ## 2. URI Syntax
+{: #uri-syntax}
 
 The IIIF Image API can be called in two ways:
 
@@ -92,6 +95,7 @@ When the base URI is dereferenced, the interaction _SHOULD_ result in the image 
 To allow for extensions, this specification does not define the server behavior when it receives requests that do not match either the base URI or one of the described URI syntaxes below.
 
 ###  2.1. Image Request URI Syntax
+{: #image-request-uri-syntax}
 
 The IIIF Image API URI for requesting an image _MUST_ conform to the following URI Template:
 
@@ -110,6 +114,7 @@ http://www.example.org/image-service/abcd1234/full/full/0/default.jpg
 The parameters of the Image Request URI include region, size, rotation, quality and format, which define the characteristics of the returned image. These are described in detail in [Image Request Parameters][image-request-parameters].
 
 ###  2.2. Image Information Request URI Syntax
+{: #image-information-request-uri-syntax}
 
 The URI for requesting image information _MUST_ conform to the following URI Template:
 
@@ -128,14 +133,17 @@ http://www.example.org/image-service/abcd1234/info.json
 The scheme, server, prefix and identifier components of the information request _MUST_ be identical to those for the image request described above for the image content that the image information document describes.  The image information document is described in detail in the [Image Information][image-information] section.
 
 ##  3. Identifier
+{: #identifier}
 
 The API places no restrictions on the form of the identifiers that a server may use or support. All special characters (e.g. ? or #) _MUST_ be URI encoded to avoid unpredictable client behaviors. The URI syntax relies upon slash (/) separators so any slashes in the identifier _MUST_ be URI encoded (also called "percent encoded"). See the additional discussion in [URI Encoding and Decoding][uri-encoding-and-decoding].
 
 ##  4. Image Request Parameters
+{: #image-request-parameters}
 
 All parameters described below are required for compliant construction of a IIIF Image API URI. The sequence of parameters in the URI _MUST_ be in the order described below. The order of the parameters is also intended as a mnemonic for the order of the operations by which the service should manipulate the image content. Thus, the requested image content is first extracted as a region of the complete image, then scaled to the requested size, mirrored and/or rotated, and finally transformed into the color quality and format. This resulting image content is returned as the representation for the URI. Image and region dimensions in pixels are always given as an integer numbers. Intermediate calculations may use floating point numbers and the rounding method is implementation specific. Some parameters, notably percentages, may be specified with floating point numbers. These should have at most 10 decimal digits and consist only of decimal digits and "." with a leading zero if less than 1.0.
 
 ###  4.1. Region
+{: #region}
 
 The region parameter defines the rectangular portion of the full image to be returned. Region can be specified by pixel coordinates, percentage or by the value "full", which specifies that the entire image should be returned.
 
@@ -198,6 +206,7 @@ Examples:
 
 
 ###  4.2. Size
+{: #size}
 
 The size parameter determines the dimensions to which the extracted region is to be scaled.
 
@@ -217,7 +226,7 @@ If the resulting height or width is zero, then the server _SHOULD_ return a 400 
 The image server _MAY_ support scaling above the full size of the extracted region.
 
 __Deprecation Warning__
-The size keyword `full` will be replaced in favor of `max` in version 3.0. Feedback is welcome via [iiif-discuss][iiif-discuss] or on the [Github issue](https://github.com/IIIF/iiif.io/issues/678).
+The size keyword `full` will be replaced in favor of `max` in version 3.0. Until that time, the `w,` syntax should be considered the [canonical form][canonical-uri-syntax] of request for the `max` size, unless `max` is equivalent to `full`. Feedback is welcome via [iiif-discuss][iiif-discuss] or on the [Github issue](https://github.com/IIIF/iiif.io/issues/678).
 {: .warning #full-dep}
 
 Examples:
@@ -273,6 +282,8 @@ Examples:
 </table>
 
 ###  4.3. Rotation
+{: #rotation}
+
 The rotation parameter specifies mirroring and rotation. A leading exclamation mark ("!") indicates that the image should be mirrored by reflection on the vertical axis before any rotation is applied. The numerical value represents the number of degrees of clockwise rotation, and may be any floating point number from 0 to 360.
 
 | Form | Description |
@@ -331,6 +342,7 @@ Examples:
 </table>
 
 ###  4.4. Quality
+{: #quality}
 
 The quality parameter determines whether the image is delivered in color, grayscale or black and white.
 
@@ -378,6 +390,7 @@ Examples:
 </table>
 
 ###  4.5. Format
+{: #format}
 
 The format of the returned image is expressed as an extension at the end of the URI.
 
@@ -402,6 +415,7 @@ Examples:
   {: .examplelist}
 
 ### 4.6. Order of Implementation
+{: #order-of-implementation}
 
 The sequence of parameters in the URI is intended as a mnemonic for the order in which image manipulations are made against the full image content. This is important to consider when implementing the service because applying the same parameters in a different sequence will often result in a different image being delivered. The order is critical so that the application calling the service reliably receives the output it expects.
 
@@ -424,6 +438,7 @@ If the rotation parameter includes mirroring ("!"), the mirroring is applied bef
 </table>
 
 ### 4.7. Canonical URI Syntax
+{: #canonical-uri-syntax}
 
 It is possible to request the same image using different combinations of parameters. While it is useful for clients to be able to express their requests in a convenient form, there are several reasons why a canonical URI syntax is desirable:
 
@@ -452,10 +467,12 @@ Link: <http://iiif.example.com/server/full/400,/0/default.jpg>;rel="canonical"
 The server _MAY_ include this link header on the image information response, however it is unnecessary as it is included in the JSON representation retrieved.
 
 ##  5. Image Information
+{: #image-information}
 
 Servers _MUST_ support requests for image information. The response includes technical properties about the image and may also contain rights and licensing properties, and services related to it.
 
 ### 5.1. Image Information Request
+{: #image-information-request}
 
 The request for the information _MUST_ conform to the URI Template:
 
@@ -490,6 +507,7 @@ Access-Control-Allow-Origin: *
 A recipe for enabling these behaviors is provided in the [Apache HTTP Server Implementation Notes][apache-notes-conditional-content-type].
 
 ### 5.2. Technical Properties
+{: #technical-properties}
 
 | Technical Property   | Required? | Description |
 | ---------- | --------- | ----------- |
@@ -506,9 +524,11 @@ A recipe for enabling these behaviors is provided in the [Apache HTTP Server Imp
 
 The objects in the `sizes` list have the properties in the following table. Images requested using these sizes _SHOULD_ have a region parameter of "full" and rotation of "0".  The size _SHOULD_ be requested using the canonical syntax of `w,`. Thus, the full URL for an image with "default" quality in "jpg" format would be: `{scheme}://{server}/{prefix}/{identifier}/full/{width},/0/default.jpg`
 
+Note that the values in `width` and `height` do not necessarily imply that an image of that size is available. If `sizes`, `maxArea`, `maxWidth`, or `maxHeight` are present, they may indicate constraints on the maximum size of image that can be requested. The `width` and `height` information is still required in order to construct tile requests and know the aspect ratio of the image.
+
 __Warning__
 There is an inconsistency between the specification of the `sizes` list and the canonical URI syntax. Clients _SHOULD_ use the [Canonical URI Syntax](#canonical-uri-syntax) when making image requests based on entries in `sizes`. For maximum compatibility, servers _SHOULD_ support both the `w,` and `w,h` forms of the `size` parameter for values in `sizes` that maintain the aspect ratio. This inconsistency will be addressed in the next major version of this specification.
-{: .warning}
+{: .warning #size-inconsistency}
 
 | Size Object Property | Required? | Description |
 | ---------- | -------- | ----------- |
@@ -553,6 +573,7 @@ The following shows a valid image information response, including the optional `
 ```
 
 ### 5.3. Profile Description
+{: #profile-description}
 
 In order to specify additional features that are supported for the image, a profile object may be added to the `profile` list. Objects in the `profile` list have the properties in the following table. The `@context`, `@id` and `@type` properties are _REQUIRED_ when the profile is dereferenced from a URI, but _SHOULD NOT_ be included in the image information response.
 
@@ -634,6 +655,7 @@ The following fragment shows a profile indicating support for additional formats
 ```
 
 ### 5.4. Rights and Licensing Properties
+{: #rights-and-licensing-properties}
 
 The rights and licensing properties, `attribution`, `license` and `logo`, have the same semantics and requirements as those in the [Presentation API][prezi-api].
 
@@ -670,7 +692,7 @@ The following shows a simple use of each of these properties:
   // ...
   "attribution" : "Provided by Example Organization",
   "logo" : "http://example.org/images/logo.png",
-  "license" : "http://example.org/rights/license1.html"
+  "license" : "http://rightsstatements.org/vocab/InC-EDU/1.0/"
   // ...
 }
 ```
@@ -678,6 +700,7 @@ The following shows a simple use of each of these properties:
 More complex examples are given in the [Complete Response Example](#complete-response).
 
 ### 5.5. Related Services
+{: #related-services}
 
 | Property   | Required? | Description |
 | ---------- | --------- | ----------- |
@@ -695,9 +718,9 @@ The following shows a use of `service` to associate the login page of an authent
   "protocol" : "http://iiif.io/api/image",
   // ...
   "service": {
-    "@context" : "http://iiif.io/api/auth/{{ site.auth_api.latest.major }}/context.json",
+    "@context" : "http://iiif.io/api/auth/{{ site.auth_api.stable.major }}/context.json",
     "@id" : "http://www.example.org/auth/login.html",
-    "profile": "http://iiif.io/api/auth/{{ site.auth_api.latest.major }}/login"
+    "profile": "http://iiif.io/api/auth/{{ site.auth_api.stable.major }}/login"
   }
 }
 ```
@@ -705,6 +728,8 @@ The following shows a use of `service` to associate the login page of an authent
 More complex examples are given in the [Complete Response Example](#complete-response).
 
 ### 5.6. Complete Response
+{: #complete-response}
+
 
 The following shows a response including all of the required and optional image information properties.
 
@@ -743,7 +768,7 @@ The following shows a response including all of the required and optional image 
   },
   "license" : [
     "http://example.org/rights/license1.html",
-    "https://creativecommons.org/licenses/by/4.0/"
+    "http://rightsstatements.org/vocab/InC-EDU/1.0/"
   ],
   "profile" : [
     "http://iiif.io/api/image/{{ page.major }}/level2.json",
@@ -757,12 +782,12 @@ The following shows a response including all of the required and optional image 
   ],
   "service" : [
     {
-      "@context": "http://iiif.io/api/annex/service/physdim/1/context.json",
-      "profile": "http://iiif.io/api/annex/service/physdim",
+      "@context": "http://iiif.io/api/annex/services/physdim/1/context.json",
+      "profile": "http://iiif.io/api/annex/services/physdim",
       "physicalScale": 0.0025,
       "physicalUnits": "in"
     },{
-      "@context" : "http://geojson.org/contexts/geojson-base.jsonld",
+      "@context" : "http://geojson.org/geojson-ld/geojson-context.jsonld",
       "@id" : "http://www.example.org/geojson/paris.json"
     }
   ]
@@ -770,6 +795,7 @@ The following shows a response including all of the required and optional image 
 ```
 
 ##  6. Compliance Levels
+{: #compliance-levels}
 
 The image information document _MUST_ specify the extent to which the API is supported by including a compliance level URI as the first entry in the `profile` property. This URI links to a description of the highest compliance level for which all requirements are met. The URI _MUST_ be one of those listed in the [Image API Compliance][compliance] document. This description contains the set of features required by the profile, as discussed in the [Image Information][image-information] section. A server _MAY_ declare different compliance levels for images with different identifiers.
 
@@ -783,12 +809,15 @@ Link: <http://iiif.io/api/image/{{ page.major }}/level1.json>;rel="profile"
 A recipe for setting this header on the Apache HTTP Server is shown in the [Apache HTTP Server Implementation Notes][apache-notes-set-compliance-link-header].
 
 ##  7. Server Responses
+{: #server-responses}
 
 ###  7.1. Successful Responses
+{: #successful-responses}
 
 Servers may transmit HTTP responses with 200 (Successful) or 3xx (Redirect) status codes when the request has been successfully processed. If the status code is 200, then the entity-body _MUST_ be the requested image or information document. If the status code is 301, 302, 303, or 304, then the entity-body is unrestricted, but it is _RECOMMENDED_ to be empty. If the status code is 301, 302, or 303 then the Location HTTP Header _MUST_ be set containing the URI of the image that fulfills the request. This enables servers to have a single canonical URI to promote caching of responses. Status code 304 is handled exactly as per the HTTP specification. Clients _SHOULD_ expect to encounter all of these situations and _MUST NOT_ assume that the entity-body of the initial response necessarily contains the image data.
 
 ###  7.2. Error Conditions
+{: #error-conditions}
 
 The order in which servers parse requests and detect errors is not specified. A request is likely to fail on the first error encountered and return an appropriate HTTP status code, with common codes given in the list below. It is _RECOMMENDED_ that the body of the error response includes a human-readable description of the error in either plain text or html.
 
@@ -804,12 +833,14 @@ The order in which servers parse requests and detect errors is not specified. A 
 {: .api-table}
 
 ##  8. Authentication
+{: #authentication}
 
 Images are generally secondary resources in a web page or application. In the case of web pages, images are embedded in the HTML `img` tag, and are retrieved via additional HTTP requests. When a user cannot load a web page, it is possible — and a generally accepted behavior — to redirect the user to another page and offer the opportunity to authenticate. This is not an option for secondary resources such as images, and the user is instead simply presented with a broken image icon.
 
 No new authentication mechanisms are proposed, nor roles for authorization business logic. Instead, it is expected that authentication requirements and processes are handled outside of any IIIF-specific context, but within a IIIF-aware access control workflow. Please see the draft [authentication][authentication-ext] specification.
 
 ##  9. URI Encoding and Decoding
+{: #uri-encoding-and-decoding}
 
 The URI syntax of this API relies upon slash (/) separators which _MUST NOT_ be encoded. Clients _MUST_ percent-encode special characters (the to-encode set below: percent and gen-delims of [RFC3986][rfc-3986] except the colon) plus any characters outside the US-ASCII set within the components of requests. For example, any slashes within the identifier part of the URI _MUST_ be percent-encoded. Encoding is necessary only for the identifier because other components will not include special characters. Percent-encoding other characters introduces no ambiguity but is unnecessary.
 
@@ -833,6 +864,7 @@ to-encode = "/" / "?" / "#" / "[" / "]" / "@" / "%"
 Servers which are incapable of processing arbitrarily encoded identifiers _SHOULD_ make their best efforts to expose only image identifiers for which clients will not encode any of the characters, and thus it is _RECOMMENDED_ to limit characters in identifiers to letters, numbers and the underscore character.
 
 ##  10. Security Considerations
+{: #security-considerations}
 
 This API defines a URI syntax and the semantics associated with its components. The composition of URIs has few security considerations except possible exposure of sensitive information in URIs or revealing of browse/view behavior of users.
 
@@ -844,6 +876,7 @@ It is recommended that servers implementing the `sizeAboveFull` [feature][featur
 Early sanity checking of URIs (lengths, trailing GET, invalid characters, out-of-range parameters) and rejection with appropriate response codes is recommended.
 
 ## 11. Appendices
+{: #appendices}
 
 ### A. Implementation Notes
 
@@ -903,18 +936,20 @@ Many thanks to the members of the [IIIF][iiif-community] for their continuous en
 
 | Date       | Description |
 | ---------- | ----------- |
+| 2017-06-09 | Version 2.1.1 [View change log][change-log-211] |
 | 2016-05-12 | Version 2.1 (Crowned Eagle) [View change log][change-log21] |
 | 2014-09-11 | Version 2.0 (Voodoo Bunny) [View change log][change-log20] |
 | 2013-09-17 | Version 1.1 (unnamed) [View change log][change-log11] |
 | 2012-08-10 | Version 1.0 (unnamed) |
 {: .api-table}
 
-[authentication-ext]: /api/auth/
-[change-log11]: /api/image/1.1/change-log/ "Change Log for Version 1.1"
-[change-log20]: /api/image/2.0/change-log/ "Change Log for Version 2.0"
-[change-log21]: /api/image/2.1/change-log/ "Change Log for Version 2.1"
-[compliance]: /api/image/{{ page.major }}.{{ page.minor }}/compliance/ "Image API Compliance"
-[compliance-quality]: /api/image/{{ page.major }}.{{ page.minor }}/compliance/#quality "Image API Compliance: Quality"
+[authentication-ext]: {{ site.url }}{{ site.baseurl }}/api/auth/
+[change-log-211]: {{ site.url }}{{ site.baseurl }}/api/image/2.1/change-log-211/ "Image API 2.1.1 Change Log"
+[change-log11]: {{ site.url }}{{ site.baseurl }}/api/image/1.1/change-log/ "Change Log for Version 1.1"
+[change-log20]: {{ site.url }}{{ site.baseurl }}/api/image/2.0/change-log/ "Change Log for Version 2.0"
+[change-log21]: {{ site.url }}{{ site.baseurl }}/api/image/2.1/change-log/ "Change Log for Version 2.1"
+[compliance]: {{ site.url }}{{ site.baseurl }}/api/image/{{ page.major }}.{{ page.minor }}/compliance/ "Image API Compliance"
+[compliance-quality]: {{ site.url }}{{ site.baseurl }}/api/image/{{ page.major }}.{{ page.minor }}/compliance/#quality "Image API Compliance: Quality"
 
 [cors-spec]: http://www.w3.org/TR/cors/ "Cross-Origin Resource Sharing"
 [iiif-discuss]: mailto:iiif-discuss@googlegroups.com "Email Discussion List"
@@ -928,16 +963,16 @@ Many thanks to the members of the [IIIF][iiif-community] for their continuous en
 [rfc-6266]: http://tools.ietf.org/html/rfc6266 "Use of the Content-Disposition Header Field in the Hypertext Transfer Protocol (HTTP)"
 [rfc-6570]: http://tools.ietf.org/html/rfc6570 "URI Template"
 [semver]: http://semver.org/spec/v2.0.0.html "Semantic Versioning 2.0.0"
-[iiif-community]: /community/ "IIIF Community"
-[versioning]: /api/annex/notes/semver/ "Versioning of APIs"
-[prezi-api]: /api/presentation/{{ site.presentation_api.latest.major }}.{{ site.presentation_api.latest.minor }}/ "Presentation API"
-[prezi-html]: /api/presentation/{{ site.presentation_api.latest.major }}.{{ site.presentation_api.latest.minor }}/#html-markup-in-property-values "Presentation API Section 4.4"
+[iiif-community]: {{page.webprefix}}/community/ "IIIF Community"
+[versioning]: {{ site.url }}{{ site.baseurl }}/api/annex/notes/semver/ "Versioning of APIs"
+[prezi-api]: {{ site.url }}{{ site.baseurl }}/api/presentation/{{ site.presentation_api.stable.major }}.{{ site.presentation_api.stable.minor }}/ "Presentation API"
+[prezi-html]: {{ site.url }}{{ site.baseurl }}/api/presentation/{{ site.presentation_api.stable.major }}.{{ site.presentation_api.stable.minor }}/#html-markup-in-property-values "Presentation API Section 4.4"
 
-[service-profiles]: /api/annex/services/ "Services Annex Document"
-[annex-frames]: /api/annex/notes/jsonld/ "JSON-LD Frames Implementation Notes"
-[apache-notes]: /api/annex/notes/apache/ "Apache HTTP Server Implementation Notes"
-[apache-notes-conditional-content-type]: /api/annex/notes/apache/#conditional-content-types "Apache HTTP Server Implementation Notes: Conditional Content Types"
-[apache-notes-set-compliance-link-header]: /api/annex/notes/apache/#set-compliance-link-header "Apache HTTP Server Implementation Notes: Set Compliance Link Header"
+[service-profiles]: {{ site.url }}{{ site.baseurl }}/api/annex/services/ "Services Annex Document"
+[annex-frames]: {{ site.url }}{{ site.baseurl }}/api/annex/notes/jsonld/ "JSON-LD Frames Implementation Notes"
+[apache-notes]: {{ site.url }}{{ site.baseurl }}/api/annex/notes/apache/ "Apache HTTP Server Implementation Notes"
+[apache-notes-conditional-content-type]: {{ site.url }}{{ site.baseurl }}/api/annex/notes/apache/#conditional-content-types "Apache HTTP Server Implementation Notes: Conditional Content Types"
+[apache-notes-set-compliance-link-header]: {{ site.url }}{{ site.baseurl }}/api/annex/notes/apache/#set-compliance-link-header "Apache HTTP Server Implementation Notes: Set Compliance Link Header"
 [audience-and-scope]: #audience-and-scope "1. Audience and Scope"
 [uri-syntax]: #uri-syntax "2. URI Syntax"
 [image-request-uri-syntax]: #image-request-uri-syntax "2.1. Image Request URI Syntax"
@@ -970,8 +1005,8 @@ Many thanks to the members of the [IIIF][iiif-community] for their continuous en
 [b-versioning]: #b-versioning "B. Versioning"
 [c-acknowledgments]: #c-acknowledgments "C. Acknowledgments"
 [d-change-log]: #d-change-log "D. Change Log"
-[prev-version]: http://iiif.io/api/image/2.0/ "Previous Version"
-[stable-version]: http://iiif.io/api/image/{{ site.image_api.latest.major }}.{{ site.image_api.latest.minor }}/ "Stable Version"
+[prev-version]: {{ page.webprefix }}/api/image/2.0/ "Previous Version"
+[stable-version]: {{ page.webprefix }}/api/image/{{ site.image_api.stable.major }}.{{ site.image_api.stable.minor }}/ "Stable Version"
 [wsgi]: https://www.python.org/dev/peps/pep-0333/
 [dep-sizes]: #dep-sizes "Deprecated sizes warning"
 

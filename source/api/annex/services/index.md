@@ -13,11 +13,11 @@ Changes will be tracked within the document.
 
 **Editors**
 
-  * **[Benjamin Albritton](https://orcid.org/0000-0001-8774-7964)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0001-8774-7964), [_Stanford University_](http://www.stanford.edu)
-  * **[Michael Appleby](https://orcid.org/0000-0002-1266-298X)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0002-1266-298X), [_Yale University_](http://www.yale.edu/)
-  * **[Robert Sanderson](https://orcid.org/0000-0003-4441-6852)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0003-4441-6852), [_Stanford University_](http://www.stanford.edu/)
-  * **[Jon Stroop](https://orcid.org/0000-0002-0367-1243)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0002-0367-1243), [_Princeton University Library_](https://library.princeton.edu/)
-  * **[Simeon Warner](https://orcid.org/0000-0002-7970-7855)** [![ORCID iD](/img/orcid_16x16.png)](https://orcid.org/0000-0002-7970-7855), [_Cornell University_](https://www.cornell.edu/)
+  * **[Benjamin Albritton](https://orcid.org/0000-0001-8774-7964)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0001-8774-7964), [_Stanford University_](http://www.stanford.edu)
+  * **[Michael Appleby](https://orcid.org/0000-0002-1266-298X)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0002-1266-298X), [_Yale University_](http://www.yale.edu/)
+  * **[Robert Sanderson](https://orcid.org/0000-0003-4441-6852)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0003-4441-6852), [_Stanford University_](http://www.stanford.edu/)
+  * **[Jon Stroop](https://orcid.org/0000-0002-0367-1243)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0002-0367-1243), [_Princeton University Library_](https://library.princeton.edu/)
+  * **[Simeon Warner](https://orcid.org/0000-0002-7970-7855)** [![ORCID iD]({{ site.url }}{{ site.baseurl }}/img/orcid_16x16.png)](https://orcid.org/0000-0002-7970-7855), [_Cornell University_](https://www.cornell.edu/)
   {: .names}
 
 {% include copyright.md %}
@@ -35,12 +35,14 @@ Please send feedback to [iiif-discuss@googlegroups.com][iiif-discuss]
 {:toc}
 
 ## 1. Introduction
+{: #introduction}
 
 There are many additional features that could be included in descriptions beyond those already defined in the [Presentation API][prezi-api] or the information request in the [Image API][image-api]. In order to keep the current APIs manageable and lean enough to be understood, implemented, and validated, any feature which is not able to be justified as universally applicable will be imported as a service from an external resource. The adoption of [JSON-LD][json-ld] is paramount in this respect, as it provides a basis for interoperability and disambiguation between systems.
 
 The inclusion of services in this document that are outside of the IIIF domain _MUST NOT_ be interpreted as endorsement, support, or approval from the editors, the IIIF community or any individual. This annex is provided as a registry of services to advertise their existence and attempt to ensure some consistency between implementations for common but not universal requirements.
 
 ## 2. Requirements
+{: #requirements}
 
 Service information included in the API responses _MUST_ be both valid JSON-LD, and include a service-specific `@context`.  Services _SHOULD_ have an `@id` that can be dereferenced, and if so, the representation retrieved from that URI _SHOULD_ be JSON-LD.  The service at the URI in `@id` _MAY_ require additional parameters, generate representations other than JSON-LD, or have no JSON-LD representation at all.
 
@@ -61,17 +63,19 @@ Services _MAY_ be included either by reference or embedded within the response. 
 ```
 
 ## 3. Services
+{: #services}
 
-This table summarizes the services available and which APIs they may be used in.  The '![not allowed][icon-na]' icon means that the service is not to be used in the API. The '![recommended][icon-recc]' icon means that the service can be used in the API.
+This table summarizes the services available and which APIs they may be used in.  The '![not allowed][icon-na]' icon means that the service is not to be used in the API. The '![recommended][icon-rec]' icon means that the service can be used in the API.
 
 | Service                        | Image API                 | Presentation API          |
 | ------------------------------ |:-------------------------:|:-------------------------:|
-| [Image Information][imageinfo] | ![optional][icon-opt]     | ![recommended][icon-recc] |  
-| [GeoJSON][lgeojson]            | ![not allowed][icon-na]   | ![recommended][icon-recc] |
-| [Physical Dimensions][physdim] | ![recommended][icon-recc] | ![recommended][icon-recc] |
+| [Image Information][imageinfo] | ![optional][icon-opt]     | ![recommended][icon-rec] |  
+| [GeoJSON][lgeojson]            | ![not allowed][icon-na]   | ![recommended][icon-rec] |
+| [Physical Dimensions][physdim] | ![recommended][icon-rec] | ![recommended][icon-rec] |
 {: .api-table}
 
 ### 3.1 Image Information
+{: #image-information}
 _Added: 2014-05-20_
 
 The Image Information service allows the [Presentation API][prezi-api], and potentially other APIs, to reference content to be displayed via the [Image API][image-api].  The JSON-LD content to be referenced or embedded is the Image Information document, also known as `info.json`.  The service _MUST_ have the `@context`, `@id` and `profile` keys, pointing to the context document, service base URI and compliance level profile respectively.
@@ -79,9 +83,9 @@ The Image Information service allows the [Presentation API][prezi-api], and pote
 ``` json-doc
 {
   "service": {
-    "@context" : "http://iiif.io/api/image/{{ site.image_api.latest.major }}/context.json",
+    "@context" : "http://iiif.io/api/image/2/context.json",
     "@id" : "http://www.example.org/image-service/abcd1234",
-    "profile": "http://iiif.io/api/image/{{ site.image_api.latest.major }}/level2.json"
+    "profile": "http://iiif.io/api/image/2/level2.json"
   }
 }
 ```
@@ -91,7 +95,7 @@ The service _MAY_ have additional information embedded from the Image Informatio
 ``` json-doc
 {
   "service": {
-    "@context" : "http://iiif.io/api/image/{{ site.image_api.latest.major }}/context.json",
+    "@context" : "http://iiif.io/api/image/2/context.json",
     "@id" : "http://www.example.org/image-service/abcd1234",
     "protocol": "http://iiif.io/api/image",
     "width" : 6000,
@@ -105,7 +109,7 @@ The service _MAY_ have additional information embedded from the Image Informatio
       {"width" : 512, "scaleFactors" : [1,2,4,8,16]}
     ],
     "profile" : [
-      "http://iiif.io/api/image/{{ site.image_api.latest.major }}/level2.json",
+      "http://iiif.io/api/image/2/level2.json",
       {
         "formats" : [ "gif", "pdf" ],
         "qualities" : [ "color", "gray" ],
@@ -118,11 +122,11 @@ The service _MAY_ have additional information embedded from the Image Informatio
 }
 ```
 
-With the `logo` property added to the Image Information description in version 2.1 of the Image API{% unless site.image_api.latest.major >= 2 and site.image_api.latest.minor >= 1 %} (forthcoming){% endunless %}, it is possible and reasonable for one `info.json` response to embed another using this pattern.  In this case, the second service is related to the icon that should be displayed when a client renders the image described by the main response.
+With the `logo` property added to the Image Information description in version 2.1 of the Image API, it is possible and reasonable for one `info.json` response to embed another using this pattern.  In this case, the second service is related to the icon that should be displayed when a client renders the image described by the main response.
 
 ``` json-doc
 {
-  "@context" : "http://iiif.io/api/image/{{ site.image_api.latest.major }}/context.json",
+  "@context" : "http://iiif.io/api/image/2/context.json",
   "@id" : "http://www.example.org/image-service/baseImage",
   "protocol" : "http://iiif.io/api/image",
 
@@ -132,7 +136,7 @@ With the `logo` property added to the Image Information description in version 2
     "service": {
       "@id": "http://example.org/image-service/logo",
       "protocol": "http://iiif.io/api/image",
-      "profile": "http://iiif.io/api/image/{{ site.image_api.latest.major }}/level2.json"
+      "profile": "http://iiif.io/api/image/2/level2.json"
     }
   }
 }
@@ -140,18 +144,19 @@ With the `logo` property added to the Image Information description in version 2
 
 
 ### 3.2 GeoJSON
-_Added: 2014-05-20_
+{: #geojson}
+_Added: 2014-05-20_, _Latest Revision: 2017-03-29_
 
 [GeoJSON][geojson] provides the ability to associate a geographical place with a resource, in order to drive a map-based user interface or visualization tool.  This might be a location associated with the provenance of the object such as where it was created, or where it is currently held.  The location might also be related to the content of the resource, such as a city mentioned in the text or the landmark depicted in a photograph.  It is not appropriate to use this feature for tagging of time, people, events, and other semantic metadata outside of the scope of the Presentation API.
 
-The [JSON-LD representation][geojson-ld] of GeoJSON, with `@context` `http://geojson.org/contexts/geojson-base.jsonld` _SHOULD_ be used. See the GeoJSON documentation for a full description of the functionality available.
+The [JSON-LD representation][geojson-ld] of GeoJSON, with `@context` `http://geojson.org/geojson-ld/geojson-context.jsonld` _SHOULD_ be used. See the GeoJSON documentation for a full description of the functionality available.
 
 An external reference example for tagging a place, where the URI would return a GeoJSON description of the city of Paris, France:
 
 ``` json-doc
 {
   "service": {
-    "@context" : "http://geojson.org/contexts/geojson-base.jsonld",
+    "@context" : "http://geojson.org/geojson-ld/geojson-context.jsonld",
     "@id" : "http://www.example.org/geojson/paris.json"
   }
 }
@@ -162,7 +167,7 @@ Or embedding the content:
 ``` json-doc
 {
   "service": {
-    "@context" : "http://geojson.org/contexts/geojson-base.jsonld",
+    "@context" : "http://geojson.org/geojson-ld/geojson-context.jsonld",
     "@id" : "http://www.example.org/geojson/paris.json",
     "type": "Feature",
     "properties": {"name": "Paris"},
@@ -175,6 +180,7 @@ Or embedding the content:
 ```
 
 ### 3.3 Physical Dimensions
+{: #physical-dimensions}
 _Added: 2014-05-20_, _Latest Revision: 2015-12-04_
 
 For digitized objects, it is often useful to know the physical dimensions of the object.  When available, they allow a client to present a ruler, or other rendition of physical scale, to the user.  However, implementers are warned that while this information may be available, frequently:
@@ -231,27 +237,28 @@ Thanks to the members of the [IIIF][iiif-community] for their continuous engagem
 
 | Date       | Description                                        |
 | ---------- | -------------------------------------------------- |
+| 2017-03-29 | Fix externally changed context URI for GeoJSON     |
 | 2015-12-04 | Fix link for physical dimensions context           |
 | 2014-06-01 | Version 1.0                                        |
 
-   [semver]: /api/annex/notes/semver/ "Versioning of APIs"
+   [semver]: {{ site.url }}{{ site.baseurl }}/api/annex/notes/semver/ "Versioning of APIs"
    [iiif-discuss]: mailto:iiif-discuss@googlegroups.com "Email Discussion List"
-   [image-api]: /api/image/{{ site.image_api.latest.major }}.{{ site.image_api.latest.minor }}/ "Image API"
-   [prezi-api]: /api/presentation/{{ site.presentation_api.latest.major }}.{{ site.presentation_api.latest.minor }}/ "Presentation API"
+   [image-api]: {{ site.url }}{{ site.baseurl }}/api/image/{{ site.image_api.stable.major }}.{{ site.image_api.stable.minor }}/ "Image API"
+   [prezi-api]: {{ site.url }}{{ site.baseurl }}/api/presentation/{{ site.presentation_api.stable.major }}.{{ site.presentation_api.stable.minor }}/ "Presentation API"
    [json-ld]: http://www.w3.org/TR/json-ld/ "JSON-LD"
-   [iiif-community]: /community/ "IIIF Community"
+   [iiif-community]: {{page.webprefix}}/community/ "IIIF Community"
    [mellon]: http://www.mellon.org/ "The Andrew W. Mellon Foundation"
    [geojson]: http://geojson.org/ "GeoJSON"
-   [geojson-ld]: http://geojson.org/vocab "GeoJSON-LD"
+   [geojson-ld]: http://geojson.org/geojson-ld/ "GeoJSON-LD"
 
 [imageinfo]: #image-information
 [lgeojson]: #geojson
 [physdim]: #physical-dimensions
 
-[icon-req]: /img/metadata-api/required.png "Required"
-[icon-recc]: /img/metadata-api/recommended.png "Recommended"
-[icon-opt]: /img/metadata-api/optional.png "Optional"
-[icon-na]: /img/metadata-api/not_allowed.png "Not allowed"
+[icon-req]: {{ site.url }}{{ site.baseurl }}/img/metadata-api/required.png "Required"
+[icon-rec]: {{ site.url }}{{ site.baseurl }}/img/metadata-api/recommended.png "Recommended"
+[icon-opt]: {{ site.url }}{{ site.baseurl }}/img/metadata-api/optional.png "Optional"
+[icon-na]: {{ site.url }}{{ site.baseurl }}/img/metadata-api/not_allowed.png "Not allowed"
 
 
 {% include acronyms.md %}

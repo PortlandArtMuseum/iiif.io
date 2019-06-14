@@ -4,7 +4,7 @@ redirect_from:
   - /model/shared-canvas/
 ---
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 <title>Shared Canvas Data Model</title>
@@ -32,9 +32,9 @@ redirect_from:
 
 <dl>
   <dt>This version:</dt>
-  <dd><a href="/model/shared-canvas/1.0/">http://iiif.io/model/shared-canvas/1.0/</a></dd>
+  <dd><a href="{{ site.url }}{{ site.baseurl }}/model/shared-canvas/1.0/">{{ site.url }}{{ site.baseurl }}/model/shared-canvas/1.0/</a></dd>
   <dt>Latest version:</dt>
-  <dd><a href="/model/shared-canvas/">http://iiif.io/model/shared-canvas/</a></dd>
+  <dd><a href="{{ site.url }}{{ site.baseurl }}/model/shared-canvas/">{{ site.url }}{{ site.baseurl }}/model/shared-canvas/</a></dd>
 </dl>
 
 <dl class="EditorsContributors">
@@ -424,7 +424,7 @@ reading, without rotating the entire page.  Zones may be associated with multipl
   </div>
 </div>
 
-<p>Like Canvases, Zones have a height and width to provide an aspect ratio, and a label for choices and interpretation.  Zones may also have a <code class="tech">sc:naturalAngle</code> property to define the rotation for easy of reading.  They are associated with Canvases via Annotations, as described in the next section.
+<p>Like Canvases, Zones have a height and width to provide an aspect ratio, and a label for choices and interpretation.  Zones may also have a <code class="tech">sc:naturalAngle</code> property to define the rotation for ease of reading.  They are associated with Canvases via Annotations, as described in the next section.
 </p>
 
 <p>Please Note:  Zones are an advanced modeling component, and while they are important for several important use cases,
@@ -947,7 +947,7 @@ The Shared Canvas model uses:
 <tr><td>sc:attributionLabel</td><td>Property</td><td>An attribution that must be displayed along with the resource. For example: "Held at A Library (NY)"</td></tr>
 <tr><td>sc:rightsLabel</td><td>Property</td><td>A rights or license statement, describing how the facsimile may be reused.</td></tr>
 
-<tr><td>dc:description</td><td>Property</td><td>A longer form description of the object.  It may be asssociated with any of the resources in the model.</td></tr>
+<tr><td>dc:description</td><td>Property</td><td>A longer form description of the object.  It may be associated with any of the resources in the model.</td></tr>
 
 </table>
 </blockquote>
@@ -1078,6 +1078,6 @@ The editors would like to thank the following for their valuable contributions:
 
 </div>
 
-&nbsp;<br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><span property="dct:title" rel="dct:type">This work </span> by <a href="http://iiif.io/" property="cc:attributionName" rel="cc:attributionURL">the IIIF</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+&nbsp;<br/><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png" /></a><span property="dct:title" rel="dct:type">This work </span> by <a href="{{ page.webprefix }}" property="cc:attributionName" rel="cc:attributionURL">the IIIF</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
 </body>
 </html>
